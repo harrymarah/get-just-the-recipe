@@ -1,25 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import SearchBar from './components/SearchBar';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { recipeUls : [] }
+
+    this.getHtml = this.getHtml.bind(this)
+  }
+
+  getHtml(url) {
+    fetch('https://fierce-basin-26627.herokuapp.com/' + url)
+    .then(response => {
+      return response.text()
+    })
+    .then(html => {
+      const parser = new DOMParser()
+
+      const doc = parser.parseFromString(html, 'text/html')
+
+      const uls = doc.querySelectorAll('ul')
+
+      const ulsArr = Array.prototype.slice.call(uls)
+
+      console.log(ulsArr)
+
+      this.setState({recipeUls: ulsArr})
+    })
+    .catch(e => console.error(e))
+  }
+
+  render() {
+    return (
+      <div>
+        <SearchBar />
+        
+      </div>
+    );
+  }
 }
 
 export default App;
