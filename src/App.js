@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SearchBar from './components/SearchBar';
+import ShowAllUls from './components/ShowAllUls';
 
 class App extends Component {
   constructor(props) {
@@ -23,8 +24,6 @@ class App extends Component {
 
       const ulsArr = Array.prototype.slice.call(uls)
 
-      console.log(ulsArr)
-
       this.setState({recipeUls: ulsArr})
     })
     .catch(e => console.error(e))
@@ -33,7 +32,9 @@ class App extends Component {
   render() {
     return (
       <div>
-        <SearchBar />
+        <SearchBar getRecipeUls={this.getHtml} />
+
+        <ShowAllUls allRecipeUls={this.state.recipeUls} />
         
       </div>
     );
