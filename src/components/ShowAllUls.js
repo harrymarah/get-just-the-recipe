@@ -2,15 +2,14 @@ import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 const ShowAllUls = (props) => {
-    console.log(props.allRecipeUls)
-    console.log(typeof props.allRecipeUls)
-    const allUlsInDivs = props.allRecipeUls.map(ul => {
-        return <div key={uuidv4()}> {ul} </div>
-    })
-
+    const html = props.allRecipeUls[33]
+    console.log(props.allRecipeUls[33])
+    // const returnHtml = () => {
+    //     return {__html: html}
+    // }    
     return (
-        <div>
-            {allUlsInDivs}
+        <div dangerouslySetInnerHTML={{__html: props.allRecipeUls[33].outerHTML}} >
+        
         </div>
     );
 };
