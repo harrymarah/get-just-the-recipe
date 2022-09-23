@@ -1,18 +1,22 @@
 import React from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import './ShowAllUls.css'
+import SingleUl from './SingleUl'
+import { v4 as uuidv4 } from 'uuid';
+
 
 const ShowAllUls = (props) => {
     const uls = props.allRecipeUls.map(ul => {
-        return <div key={uuidv4()}>
-            <ul className='single-ul' dangerouslySetInnerHTML={{__html: ul.innerHTML}}></ul>
-        </div>
+        return <SingleUl key={uuidv4()} ulHtml={ul} selectDiv={props.selectDiv}/>
     })
+
     return (
-        <div className='ul-group'>
-            {uls}
+        <div>
+            <div className='ul-group'>
+                {uls}
+            </div>
             {props.allRecipeUls.length ? <button>Next</button> : ''}
         </div>
+        
     );
 };
 

@@ -2,11 +2,3 @@
     display: flex;
     flex-wrap: wrap;
 }
-
-.single-ul{
-    height: 200px;
-    width: 300px;
-    overflow: hidden;
-    border: 1px solid black;
-    margin: 1rem;
-}
