@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import SearchBar from './components/SearchBar';
 import ShowAllUls from './components/ShowAllUls';
+import ShowSelectedUls from './components/ShowSelectedUls'
 
 const App = () => {
   const [recipeUls, setRecipeUls] = useState([])
@@ -28,20 +29,36 @@ const App = () => {
       toggleLoading(false)
     }
 
-
+  let selectedDivs = []
 
   const selectDiv = (e) => {
-      e.currentTarget.classList.toggle('selected')
-      // this.setState({selectedRecipeUls: [...this.state.selectedRecipeUls, e.currentTarget.innerHTML]})
-      // console.log(this.state.selectedRecipeUls)
+      if(!e.currentTarget.selected) {
+        selectedDivs.push(e.currentTarget.innerHTML)
+        e.currentTarget.selected = true
+        e.currentTarget.classList.add('selected')
+      } else {
+        const index = selectedDivs.indexOf(e.currentTarget.innerHTML)
+        selectedDivs.splice(index, 1)
+        e.currentTarget.selected = false
+        e.currentTarget.classList.remove('selected')
+      }
     }
+
+    const showSelectedUls = () => {
+      setSelectedRecipeUls(selectedDivs)
+      setRecipeUls([])
+      selectedDivs = []
+    }
+
   return (
       <div>
           <SearchBar getRecipeUls={getHtml} />
 
           {isLoading ? 'loading' : ''}
 
-          <ShowAllUls allRecipeUls={recipeUls} selectDiv={selectDiv}/>    
+          <ShowAllUls allRecipeUls={recipeUls} selectDiv={selectDiv} showSelectedUls={showSelectedUls} />   
+
+          <ShowSelectedUls selectedRecipeUls={selectedRecipeUls} /> 
     </div>
   );
 };
