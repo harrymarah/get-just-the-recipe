@@ -1,4 +1,22 @@
+.ShowAllUls {
+    display: flex;
+    flex-direction: column;
+    margin: 2rem 0;
+}
+
 .ul-group{
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+button {
+    padding: 1rem;
+    font: inherit;
+    font-size: 1.5rem;
+    background-color: #7FC8F8;
+    border: none;
+    border-radius: 15px;
+    width: 200px;
+    margin: auto;
 }

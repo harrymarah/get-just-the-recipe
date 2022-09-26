@@ -10,7 +10,7 @@ const ShowAllUls = (props) => {
     })
 
     return (
-        <div>
+        <div className='ShowAllUls'>
             <div className='ul-group'>
                 {uls}
             </div>

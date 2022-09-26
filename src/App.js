@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import SearchBar from './components/SearchBar';
 import ShowAllUls from './components/ShowAllUls';
 import ShowSelectedUls from './components/ShowSelectedUls'
+import './App.css'
 
 const App = () => {
   const [recipeUls, setRecipeUls] = useState([])
@@ -10,6 +11,7 @@ const App = () => {
 
   const getHtml = (url) => {
       toggleLoading(true)
+      setSelectedRecipeUls([])
       fetch('https://fierce-basin-26627.herokuapp.com/' + url)
       .then(response => {
         return response.text()
@@ -51,7 +53,7 @@ const App = () => {
     }
 
   return (
-      <div>
+      <main>
           <SearchBar getRecipeUls={getHtml} />
 
           {isLoading ? 'loading' : ''}
@@ -59,7 +61,7 @@ const App = () => {
           <ShowAllUls allRecipeUls={recipeUls} selectDiv={selectDiv} showSelectedUls={showSelectedUls} />   
 
           <ShowSelectedUls selectedRecipeUls={selectedRecipeUls} /> 
-    </div>
+    </main>
   );
 };
 

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './SearchBar.css'
 
 const SearchBar = (props) => {
     const [urlSearch, updateUrlSearch] = useState('')
@@ -10,21 +11,20 @@ const SearchBar = (props) => {
     }
 
     return (
-        <div>
             <form onSubmit={handleSearch}>
-                <label htmlFor='url-input'>Paste in the recipe URL</label>
-                <input 
-                    onChange={e => updateUrlSearch(e.target.value)}
-                    value={urlSearch}
-                    type='text' 
-                    id='url-input'
-                >
-                </input>
-                <input type='submit'></input>
+                <label className='heading' htmlFor='url-input'>Paste in the entire recipe URL</label>
+                <div className='searchbar-wrapper'>
+                    <input 
+                        onChange={e => updateUrlSearch(e.target.value)}
+                        value={urlSearch}
+                        type='text' 
+                        id='url-input'
+                    >
+                    </input>
+                    <input type='submit'></input>
+                </div>
             </form>
-            
-        </div>
-    );
+     );
 };
 
 
