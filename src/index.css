@@ -1,10 +1,12 @@
 body {
   margin: 0;
   font-family: 'Dosis', sans-serif;
-  background-color: #f9f9f9;
+  background: rgb(249,249,249);
+  background: radial-gradient(circle, rgba(249,249,249,1) 24%, rgba(238,238,238,1) 100%);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   box-sizing: border-box;
+  margin-bottom: 5rem;
 }
 
 code {

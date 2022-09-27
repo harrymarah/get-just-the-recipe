@@ -26,9 +26,9 @@ const App = () => {
         const ulsArr = Array.prototype.slice.call(uls)
   
         setRecipeUls(ulsArr)
+        toggleLoading(false)
       })
       .catch(e => console.error(e))
-      toggleLoading(false)
     }
 
   let selectedDivs = []
@@ -54,69 +54,13 @@ const App = () => {
 
   return (
       <main>
-          <SearchBar getRecipeUls={getHtml} />
+          <SearchBar getRecipeUls={getHtml} isLoading={isLoading} />
 
-          {isLoading ? 'loading' : ''}
+          {recipeUls.length ? <ShowAllUls allRecipeUls={recipeUls} selectDiv={selectDiv} showSelectedUls={showSelectedUls} /> : ''}   
 
-          <ShowAllUls allRecipeUls={recipeUls} selectDiv={selectDiv} showSelectedUls={showSelectedUls} />   
-
-          <ShowSelectedUls selectedRecipeUls={selectedRecipeUls} /> 
+          {selectedRecipeUls.length ? <ShowSelectedUls selectedRecipeUls={selectedRecipeUls} /> : ''} 
     </main>
   );
 };
-
-// class App extends Component {
-//   constructor(props) {
-//     super(props)
-//     this.state = { 
-//       recipeUls : [],
-//       selectedRecipeUls: [],
-//       isLoading: false
-//     }
-
-//     this.getHtml = this.getHtml.bind(this)
-//     this.selectDiv = this.selectDiv.bind(this)
-//   }
-
-//   getHtml(url) {
-//     this.setState({isLoading: true})
-//     fetch('https://fierce-basin-26627.herokuapp.com/' + url)
-//     .then(response => {
-//       return response.text()
-//     })
-//     .then(html => {
-//       const parser = new DOMParser()
-
-//       const doc = parser.parseFromString(html, 'text/html')
-
-//       const uls = doc.querySelectorAll('ul')
-
-//       const ulsArr = Array.prototype.slice.call(uls)
-
-//       this.setState({recipeUls: ulsArr})
-//     })
-//     .catch(e => console.error(e))
-//     this.setState({isLoading: false})
-//   }
-
-//   selectDiv(e) {
-//     e.currentTarget.classList.toggle('selected')
-//     // this.setState({selectedRecipeUls: [...this.state.selectedRecipeUls, e.currentTarget.innerHTML]})
-//     // console.log(this.state.selectedRecipeUls)
-//   }
-
-//   render() {
-//     return (
-//       <div>
-//         <SearchBar getRecipeUls={this.getHtml} />
-
-//         {this.state.isLoading ? 'loading' : ''}
-
-//         <ShowAllUls allRecipeUls={this.state.recipeUls} selectDiv={this.selectDiv}/>
-        
-//       </div>
-//     );
-//   }
-// }
 
 export default App;

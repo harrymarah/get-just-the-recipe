@@ -14,7 +14,7 @@ const ShowAllUls = (props) => {
             <div className='ul-group'>
                 {uls}
             </div>
-            {props.allRecipeUls.length ? <button onClick={props.showSelectedUls}>Next</button> : ''}
+            {props.allRecipeUls.length ? <button className='next-button' onClick={props.showSelectedUls}>Next <i className="fa-solid fa-angles-right"></i></button> : ''}
         </div>
         
     );

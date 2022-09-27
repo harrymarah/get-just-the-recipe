@@ -7,16 +7,20 @@
 .ul-group{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
-button {
+.next-button {
     padding: 1rem;
     font: inherit;
-    font-size: 1.5rem;
-    background-color: #7FC8F8;
+    font-size: 1.8rem;
+    color: #f9f9f9;
+    background-color: #41EAD4;
     border: none;
-    border-radius: 15px;
+    border-radius: 50px;
+    font-weight: 600;
     width: 200px;
     margin: auto;
+    align-items: baseline;
+    margin-top: 3rem;
 }

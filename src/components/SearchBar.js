@@ -10,6 +10,13 @@ const SearchBar = (props) => {
         updateUrlSearch('')
     }
 
+    let button
+    if(props.isLoading){
+        button = <button className='button-loading'><i className="fa-solid fa-spinner"></i></button>
+    } else {
+        button = <button className='submit-button' type='submit'><i className="fa-solid fa-magnifying-glass"></i></button>
+    }
+
     return (
             <form onSubmit={handleSearch}>
                 <label className='heading' htmlFor='url-input'>Paste in the entire recipe URL</label>
@@ -21,7 +28,7 @@ const SearchBar = (props) => {
                         id='url-input'
                     >
                     </input>
-                    <input type='submit'></input>
+                    {button}
                 </div>
             </form>
      );

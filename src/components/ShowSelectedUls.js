@@ -8,6 +8,7 @@ const ShowSelectedUls = (props) => {
     })
     return (
         <div className='ShowSelectedUls'>
+            <h1>Your recipe...</h1>
             {selectedUls}
         </div>
     );
