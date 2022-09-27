@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import SearchBar from './components/SearchBar';
 import ShowAllUls from './components/ShowAllUls';
 import ShowSelectedUls from './components/ShowSelectedUls'
+import Guide from './components/Guide'
 import './App.css'
 
 const App = () => {
   const [recipeUls, setRecipeUls] = useState([])
   const [selectedRecipeUls, setSelectedRecipeUls] = useState([])
   const [isLoading, toggleLoading] = useState(false)
+  const [stage, updateStage] = useState(1)
 
   const getHtml = (url) => {
       toggleLoading(true)
@@ -26,6 +28,7 @@ const App = () => {
         const ulsArr = Array.prototype.slice.call(uls)
   
         setRecipeUls(ulsArr)
+        updateStage(2)
         toggleLoading(false)
       })
       .catch(e => console.error(e))
@@ -50,15 +53,24 @@ const App = () => {
       setSelectedRecipeUls(selectedDivs)
       setRecipeUls([])
       selectedDivs = []
+      updateStage(3)
+    }
+
+    const resetUI = () => {
+      setRecipeUls([])
+      setSelectedRecipeUls([])
+      updateStage(1)
     }
 
   return (
       <main>
           <SearchBar getRecipeUls={getHtml} isLoading={isLoading} />
 
+          <Guide stage={stage} />
+
           {recipeUls.length ? <ShowAllUls allRecipeUls={recipeUls} selectDiv={selectDiv} showSelectedUls={showSelectedUls} /> : ''}   
 
-          {selectedRecipeUls.length ? <ShowSelectedUls selectedRecipeUls={selectedRecipeUls} /> : ''} 
+          {selectedRecipeUls.length ? <ShowSelectedUls selectedRecipeUls={selectedRecipeUls} resetUI={resetUI} /> : ''} 
     </main>
   );
 };

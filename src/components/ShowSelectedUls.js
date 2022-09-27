@@ -10,6 +10,7 @@ const ShowSelectedUls = (props) => {
         <div className='ShowSelectedUls'>
             <h1>Your recipe...</h1>
             {selectedUls}
+            <button className='reset-button' onClick={props.resetUI}>Reset <i className="fa-solid fa-arrow-rotate-left"></i></button>
         </div>
     );
 };
