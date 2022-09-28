@@ -1,26 +1,25 @@
 .ShowAllUls {
-    display: flex;
-    flex-direction: column;
-    margin: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 0;
 }
 
-.ul-group{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+.ul-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 .next-button {
-    padding: 1rem;
-    font: inherit;
-    font-size: 1.8rem;
-    color: #f9f9f9;
-    background-color: #41EAD4;
-    border: none;
-    border-radius: 50px;
-    font-weight: 600;
-    width: 200px;
-    margin: auto;
-    align-items: baseline;
-    margin-top: 3rem;
+  padding: 1rem;
+  font: inherit;
+  font-size: 1.8rem;
+  color: #f9f9f9;
+  background-color: #41ead4;
+  border: none;
+  border-radius: 50px;
+  font-weight: 600;
+  width: 200px;
+  margin: auto;
+  margin-top: 3rem;
 }

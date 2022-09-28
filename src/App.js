@@ -3,6 +3,7 @@ import SearchBar from './components/SearchBar'
 import ShowAllUls from './components/ShowAllUls'
 import ShowSelectedUls from './components/ShowSelectedUls'
 import Guide from './components/Guide'
+import ScrollButton from './components/ScrollButton'
 import './App.css'
 
 const App = () => {
@@ -10,6 +11,21 @@ const App = () => {
   const [selectedRecipeUls, setSelectedRecipeUls] = useState([])
   const [isLoading, toggleLoading] = useState(false)
   const [stage, updateStage] = useState(1)
+  const [showScrollBtns, setScrollBtns] = useState({
+    down: false,
+    up: false,
+  })
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY < 200) {
+      setScrollBtns({ down: false, up: true })
+    } else if (
+      window.scrollY >
+      document.body.scrollHeight - window.innerHeight - 200
+    ) {
+      setScrollBtns({ down: true, up: false })
+    } else setScrollBtns({ down: true, up: true })
+  })
 
   const getHtml = (url) => {
     toggleLoading(true)
@@ -64,6 +80,15 @@ const App = () => {
 
   return (
     <main>
+      {showScrollBtns.down ? (
+        <ScrollButton
+          direction="up"
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        />
+      ) : (
+        ''
+      )}
+
       <SearchBar getRecipeUls={getHtml} isLoading={isLoading} />
 
       <Guide stage={stage} />
@@ -82,6 +107,19 @@ const App = () => {
         <ShowSelectedUls
           selectedRecipeUls={selectedRecipeUls}
           resetUI={resetUI}
+        />
+      ) : (
+        ''
+      )}
+      {showScrollBtns.up ? (
+        <ScrollButton
+          direction="down"
+          onClick={() =>
+            window.scrollTo({
+              top: document.body.scrollHeight,
+              behavior: 'smooth',
+            })
+          }
         />
       ) : (
         ''

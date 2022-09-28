@@ -1,0 +1,33 @@
+.scroll-button {
+  position: relative;
+}
+
+.scroll-button button {
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
+  font-size: 1.5rem;
+  border: none;
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  position: fixed;
+  right: 40px;
+  z-index: 10;
+}
+
+.scroll-button button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.scroll-up {
+  color: #41ead4;
+  top: 40px;
+}
+
+.scroll-down {
+  color: #ff00ce;
+  bottom: 40px;
+}
