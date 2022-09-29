@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import SearchBar from './components/SearchBar'
 import ShowAllUls from './components/ShowAllUls'
 import ShowSelectedUls from './components/ShowSelectedUls'
@@ -13,10 +13,6 @@ const App = () => {
   const [isLoading, toggleLoading] = useState(false)
   const [stage, updateStage] = useState(1)
   const [showSavedRecipes, updateShowSavedRecipes] = useState(false)
-  const scrollBtns = useRef({
-    down: false,
-    up: false,
-  })
 
   const localStorageRecipes = JSON.parse(localStorage.getItem('recipes'))
   const [savedRecipes, updateSavedRecipes] = useState(localStorageRecipes || [])
@@ -24,22 +20,6 @@ const App = () => {
   useEffect(() => {
     localStorage.setItem('savedRecipes', JSON.stringify(savedRecipes))
   }, [savedRecipes])
-
-  window.addEventListener('scroll', () => {
-    if (window.scrollY < 200) {
-      scrollBtns.current.down = false
-      scrollBtns.current.up = true
-    } else if (
-      window.scrollY >
-      document.body.scrollHeight - window.innerHeight - 200
-    ) {
-      scrollBtns.current.down = true
-      scrollBtns.current.up = false
-    } else {
-      scrollBtns.current.down = true
-      scrollBtns.current.up = true
-    }
-  })
 
   const getHtml = (url) => {
     toggleLoading(true)
@@ -82,6 +62,10 @@ const App = () => {
 
   const showSelectedUls = () => {
     setSelectedRecipeUls(selectedDivs)
+    window.scrollTo({
+      top: 338,
+      behavior: 'smooth',
+    })
     setRecipeUls([])
     selectedDivs = []
     updateStage(3)
@@ -102,22 +86,24 @@ const App = () => {
 
   return (
     <main>
-      {scrollBtns.current.down ? (
-        <ScrollButton
-          direction="up"
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        />
-      ) : (
-        ''
-      )}
-
-      <button className="saved-recipes-button" onClick={handleSavedRecipesLoad}>
-        Saved Recipes <i className="fa-solid fa-utensils"></i>
-      </button>
+      <ScrollButton
+        direction="up"
+        hidden={false}
+        onClick={() =>
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+          })
+        }
+      />
 
       <SearchBar getRecipeUls={getHtml} isLoading={isLoading} />
 
       <Guide stage={stage} />
+
+      <button className="saved-recipes-button" onClick={handleSavedRecipesLoad}>
+        Saved Recipes <i className="fa-solid fa-utensils"></i>
+      </button>
 
       {showSavedRecipes ? <SavedRecipes savedRecipes={savedRecipes} /> : ''}
 
@@ -141,19 +127,17 @@ const App = () => {
       ) : (
         ''
       )}
-      {scrollBtns.current.up ? (
-        <ScrollButton
-          direction="down"
-          onClick={() =>
-            window.scrollTo({
-              top: document.body.scrollHeight,
-              behavior: 'smooth',
-            })
-          }
-        />
-      ) : (
-        ''
-      )}
+
+      <ScrollButton
+        direction="down"
+        hidden={false}
+        onClick={() =>
+          window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: 'smooth',
+          })
+        }
+      />
     </main>
   )
 }

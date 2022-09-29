@@ -7,7 +7,7 @@ main {
 }
 
 .saved-recipes-button {
-  align-self: flex-end;
+  align-self: center;
   padding: 0.5rem 1rem;
   font: inherit;
   font-size: 1rem;
@@ -16,9 +16,17 @@ main {
   border: none;
   border-radius: 50px;
   font-weight: 600;
-  margin-bottom: -50px;
+  margin-top: 15px;
 }
 
 button {
   cursor: pointer;
+}
+
+button:not([type='submit']):hover {
+  transform: scale(1.015);
+}
+
+.hidden {
+  display: none;
 }

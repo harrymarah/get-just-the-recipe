@@ -31,3 +31,18 @@
   color: #ff00ce;
   bottom: 40px;
 }
+
+@media only screen and (max-width: 600px) {
+  .scroll-button button {
+    height: 30px;
+    width: 30px;
+    font-size: 1rem;
+    right: 10px;
+  }
+  .scroll-up {
+    top: 25px;
+  }
+  .scroll-down {
+    bottom: 25px;
+  }
+}

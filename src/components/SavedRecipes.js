@@ -13,7 +13,15 @@ const SavedRecipes = (props) => {
       ></div>
     )
   })
-  return <div className="SavedRecipes">{savedRecipeHTML}</div>
+  return (
+    <div className="SavedRecipes">
+      {savedRecipeHTML.length ? (
+        savedRecipeHTML
+      ) : (
+        <h2>You don't have any saved recipes yet...</h2>
+      )}
+    </div>
+  )
 }
 
 export default SavedRecipes

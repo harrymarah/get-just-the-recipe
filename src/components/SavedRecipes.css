@@ -12,7 +12,8 @@
   box-shadow: 0 10px 50px rgba(0, 0, 0, 0.2);
 }
 
-.SavedRecipes h1 {
+.SavedRecipes h1,
+.SavedRecipes h2 {
   text-align: center;
   color: #252525;
 }
