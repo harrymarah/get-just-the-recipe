@@ -1,9 +1,10 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import SearchBar from './components/SearchBar'
 import ShowAllUls from './components/ShowAllUls'
 import ShowSelectedUls from './components/ShowSelectedUls'
 import Guide from './components/Guide'
 import ScrollButton from './components/ScrollButton'
+import SavedRecipes from './components/SavedRecipes'
 import './App.css'
 
 const App = () => {
@@ -11,10 +12,18 @@ const App = () => {
   const [selectedRecipeUls, setSelectedRecipeUls] = useState([])
   const [isLoading, toggleLoading] = useState(false)
   const [stage, updateStage] = useState(1)
+  const [showSavedRecipes, updateShowSavedRecipes] = useState(false)
   const scrollBtns = useRef({
     down: false,
     up: false,
   })
+
+  const localStorageRecipes = JSON.parse(localStorage.getItem('recipes'))
+  const [savedRecipes, updateSavedRecipes] = useState(localStorageRecipes || [])
+
+  useEffect(() => {
+    localStorage.setItem('savedRecipes', JSON.stringify(savedRecipes))
+  }, [savedRecipes])
 
   window.addEventListener('scroll', () => {
     if (window.scrollY < 200) {
@@ -34,6 +43,7 @@ const App = () => {
 
   const getHtml = (url) => {
     toggleLoading(true)
+    updateShowSavedRecipes(false)
     setSelectedRecipeUls([])
     fetch('https://fierce-basin-26627.herokuapp.com/' + url)
       .then((response) => {
@@ -83,6 +93,13 @@ const App = () => {
     updateStage(1)
   }
 
+  const handleSavedRecipesLoad = () => {
+    setRecipeUls([])
+    setSelectedRecipeUls([])
+    updateStage(1)
+    updateShowSavedRecipes(true)
+  }
+
   return (
     <main>
       {scrollBtns.current.down ? (
@@ -94,9 +111,15 @@ const App = () => {
         ''
       )}
 
+      <button className="saved-recipes-button" onClick={handleSavedRecipesLoad}>
+        Saved Recipes <i className="fa-solid fa-utensils"></i>
+      </button>
+
       <SearchBar getRecipeUls={getHtml} isLoading={isLoading} />
 
       <Guide stage={stage} />
+
+      {showSavedRecipes ? <SavedRecipes savedRecipes={savedRecipes} /> : ''}
 
       {recipeUls.length ? (
         <ShowAllUls
@@ -112,6 +135,8 @@ const App = () => {
         <ShowSelectedUls
           selectedRecipeUls={selectedRecipeUls}
           resetUI={resetUI}
+          savedRecipes={savedRecipes}
+          updateSavedRecipes={updateSavedRecipes}
         />
       ) : (
         ''

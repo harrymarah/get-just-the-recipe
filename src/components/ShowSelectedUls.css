@@ -21,7 +21,7 @@
   text-align: center;
 }
 
-button {
+.ShowSelectedUls button {
   cursor: pointer;
   padding: 0.5rem;
   font: inherit;

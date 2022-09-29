@@ -1,5 +1,24 @@
 main {
+  display: flex;
+  flex-direction: column;
   max-width: 1200px;
   margin: auto;
   margin-top: 3rem;
+}
+
+.saved-recipes-button {
+  align-self: flex-end;
+  padding: 0.5rem 1rem;
+  font: inherit;
+  font-size: 1rem;
+  color: #f9f9f9;
+  background-color: #20d10d;
+  border: none;
+  border-radius: 50px;
+  font-weight: 600;
+  margin-bottom: -50px;
+}
+
+button {
+  cursor: pointer;
 }

@@ -10,6 +10,7 @@ const ShowSelectedUls = (props) => {
   const editHeading = () => {
     headingRef.current.classList.add('hidden')
     inputRef.current.classList.remove('hidden')
+    inputRef.current.focus()
   }
 
   const submitHeading = (e) => {
@@ -28,10 +29,17 @@ const ShowSelectedUls = (props) => {
     )
   })
 
+  let newRecipe = []
+  const saveCurrentRecipe = () => {
+    newRecipe = [headingRef.current.outerHTML, ...props.selectedRecipeUls]
+    props.updateSavedRecipes([[newRecipe], ...props.savedRecipes])
+    newRecipe = []
+  }
+
   return (
     <div className="ShowSelectedUls animate__animated animate__fadeInUp">
-      <button className="save-button">
-        Save <i class="fa-solid fa-plus"></i>
+      <button className="save-button" onClick={saveCurrentRecipe}>
+        Save <i className="fa-solid fa-plus"></i>
       </button>
       <h1 ref={headingRef} onClick={editHeading}>
         Your recipe...
