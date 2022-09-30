@@ -6,6 +6,7 @@ import 'animate.css'
 const ShowSelectedUls = (props) => {
   const headingRef = useRef()
   const inputRef = useRef()
+  const saveBtnRef = useRef()
 
   const editHeading = () => {
     headingRef.current.classList.add('hidden')
@@ -32,13 +33,22 @@ const ShowSelectedUls = (props) => {
   let newRecipe = []
   const saveCurrentRecipe = () => {
     newRecipe = [headingRef.current.outerHTML, ...props.selectedRecipeUls]
-    props.updateSavedRecipes([[newRecipe], ...props.savedRecipes])
+    // props.updateSavedRecipes([[newRecipe], ...props.savedRecipes])
+    props.updateSavedRecipes([
+      { id: uuidv4(), recipe: newRecipe },
+      ...props.savedRecipes,
+    ])
     newRecipe = []
+    saveBtnRef.current.innerText = 'Saved'
   }
 
   return (
     <div className="ShowSelectedUls animate__animated animate__fadeInUp">
-      <button className="save-button" onClick={saveCurrentRecipe}>
+      <button
+        ref={saveBtnRef}
+        className="save-button"
+        onClick={saveCurrentRecipe}
+      >
         Save <i className="fa-solid fa-plus"></i>
       </button>
       <h1 ref={headingRef} onClick={editHeading}>

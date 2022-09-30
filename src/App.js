@@ -105,7 +105,14 @@ const App = () => {
         Saved Recipes <i className="fa-solid fa-utensils"></i>
       </button>
 
-      {showSavedRecipes ? <SavedRecipes savedRecipes={savedRecipes} /> : ''}
+      {showSavedRecipes ? (
+        <SavedRecipes
+          savedRecipes={savedRecipes}
+          updateSavedRecipes={updateSavedRecipes}
+        />
+      ) : (
+        ''
+      )}
 
       {recipeUls.length ? (
         <ShowAllUls

@@ -36,7 +36,7 @@ const ScrollButton = (props) => {
   return (
     <div
       ref={buttonRef}
-      className="scroll-button animate__animated animate__fadeIn"
+      className="hidden scroll-button animate__animated animate__fadeIn"
     >
       <button onClick={props.onClick} className={getCssProp(props.direction)}>
         <i className={'fa-solid ' + getIcon(props.direction)}></i>
