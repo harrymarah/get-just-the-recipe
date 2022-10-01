@@ -14,11 +14,13 @@ const App = () => {
   const [stage, updateStage] = useState(1)
   const [showSavedRecipes, updateShowSavedRecipes] = useState(false)
 
-  const localStorageRecipes = JSON.parse(localStorage.getItem('recipes'))
+  const localStorageRecipes = JSON.parse(localStorage.getItem('savedRecipes'))
   const [savedRecipes, updateSavedRecipes] = useState(localStorageRecipes || [])
 
   useEffect(() => {
-    localStorage.setItem('savedRecipes', JSON.stringify(savedRecipes))
+    if (savedRecipes.length) {
+      localStorage.setItem('savedRecipes', JSON.stringify(savedRecipes))
+    }
   }, [savedRecipes])
 
   const getHtml = (url) => {

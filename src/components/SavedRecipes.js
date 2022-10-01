@@ -24,7 +24,7 @@ const SavedRecipes = (props) => {
           dangerouslySetInnerHTML={{ __html: sanitizeHtml(recipe.recipe) }}
         ></div>
         <button className="delete-button" onClick={deleteRecipe}>
-          Delete <i class="fa-solid fa-trash"></i>
+          Delete <i className="fa-solid fa-trash"></i>
         </button>
       </div>
     )
