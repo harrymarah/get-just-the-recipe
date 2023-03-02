@@ -27,7 +27,7 @@ const App = () => {
     toggleLoading(true)
     updateShowSavedRecipes(false)
     setSelectedRecipeUls([])
-    fetch('https://fierce-basin-26627.herokuapp.com/' + url)
+    fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`)
       .then((response) => {
         return response.text()
       })
